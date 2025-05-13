@@ -32,7 +32,8 @@ public class FirstPrintDemo {
         
         // Abschnitt 1
         
-        System.out.print( "ein Text" );                                         // Ausgabe von "ein Text"
+        System.out.print( "ein Text " );                                         // Ausgabe von "ein Text"
+
         System.out.print( "noch ein Text" );                                    // Ausgabe von "noch ein Text" direkt dahinter
         System.out.println();                                                   // neue Zeile
         
