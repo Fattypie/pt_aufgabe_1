@@ -17,202 +17,206 @@ package primeFactorPrinter;
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-
 /**
- * PFP :  {@link PrimeFactorPrinter} - see task.
+ * PFP : {@link PrimeFactorPrinter} - see task.
  * 
- * @author   (your name(s)) 
- * @version  (a version number or a date)
+ * @author (your name(s))
+ * @version (a version number or a date)
  */
 public class PrimeFactorPrinter {
-    
     /**
      * print factorization of given number
      * 
      * @param number the number to be factorized
      */
-    public void printFactorization( long number ){
-        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //###
-        //###
-        //###
-        //###           HIER kommt Ihr Code hin
-        //###
-        //###                    VVVV
-        //###                    VVVV
-        //###                    VVVV
-        //###   VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        //###      VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        //###         VVVVVVVVVVVVVVVVVVVVVVVVVV
-        //###            VVVVVVVVVVVVVVVVVVVV
-        //###               VVVVVVVVVVVVVV
-        //###                  VVVVVVVV
-        //###                     VV
+    public void printFactorization(long number) {
         
+        //new Version:
+        assert number >= 2 : "only positive long values bigger than 1 allowed!";    //in case it print 1
         
-        
-        // Fügen Sie hier Ihren Code ein
-        // bzw. ersetzen Sie diesen Kommentar durch Ihren Code.
-        // Zerlegen Sie "number" in seine Primfaktoren.
-        // Sie können hierfür die nachfolgende Methode:
-        //      "long integerSquareRoot( long )"
-        // nutzen.
-        // lin 61 - 62 are for 0 and negative numbers
-        if(number < 2) {
-            System.out.println("1, 0 oder eine negative Zahl eingegeben, nicht gueltig"); 
-        }else {
-            
-        
-        long divisor = 2;   //teiler
-        //boolean hat yase, das ist für 
-        long result = number;
-        
-        System.out.printf("%d = ", number);
-        while(result>1) {
-            if(result % divisor == 0) {
-                // print the divisor
-            result = result / divisor;
-            System.out.printf("%d ", divisor );
-            // if result is 1 it was the last number, so we dont print *
-            if(result > 1) System.out.print("* ");
-            }
-            else { divisor++; }
+//here start!
+            long restVal = number;
+            System.out.printf("%20d = ", number);      //print a 20 characters wide
+
+            long primeFactorCandidate = 2;             //starting in 2
+            do {                                                //the outer loop
+
+                while(restVal % primeFactorCandidate == 0) {    //the inside loop
+                    System.out.print(primeFactorCandidate);
+                    restVal = restVal/primeFactorCandidate;
+                    if(restVal > 1) System.out.print("*");    //if its not / to itself then it will print * i
+                }
+                
+                primeFactorCandidate++;                        //if the current number cant / by primeFactorCandidate, then the num will get higher
+            } while (primeFactorCandidate <= restVal);         //
+            System.out.flush();
+    }// method()
+
+        // line 61 - 62 are for 0 and negative numbers
+       /* 
+        ver1:
+            System.out.println("1, 0 oder eine negative Zahl eingegeben, nicht gueltig");
+        } else {
+
+            long divisor = 2; // teiler
+           
+            long result = number;
+
+            System.out.printf("%d = ", number);
+            /*
+             * while(result>1) { if(result % divisor == 0) { // print the divisor result =
+             * result / divisor; System.out.printf("%d ", divisor ); // if result is 1 it
+             * was the last number, so we dont print * if(result > 1)
+             * System.out.print("* "); } else { divisor++; } }
+             */
+        /*
+         ver2:
+            do {
+                if (result % divisor == 0) {
+                    // print the divisor
+                    result = result / divisor;
+                    System.out.printf("%d ", divisor);
+                    // if result is 1 it was the last number, so we dont print *
+                    if (result > 1)
+                        System.out.print("* ");
+                } else {
+                    divisor++;
+                }
+            } while (result > 1);
+
         }
-        }
-        
-        //For myself: little bit buggy, because it will also print the 0 from the left side. 
-        
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // Sofern Sie kein Vorwissen haben und/oder NICHT wissen was Sie tun
-        // führen Sie KEINE! Änderungen unterhalb dieser Zeilen durch.
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        //
-        System.out.flush();
-    }//method()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+*/
+
+
+
     // Den folgenden Code selbst müssen Sie NICHT verstehen!
     // Wichtig für Sie ist nur das Interface.
-    //      long integerSquareRoot( long )
+    // long integerSquareRoot( long )
     // und der folgende JavaDoc-Kommentar, der Ihnen erklärt
     // wie Sie "integerSqrt()" nutzen.
     //
-    // Programmierenanfängern wird ausdrücklich davon abgeraten, die nachfolgende Implementierung verstehen zu wollen.
-    // Denn für das Verständnis sind deutlich weniger Programmierenkenntnisse, als Mathematikkenntnisse erforderlich.
-    // Kurz: Anfänger können anders ihre Programmierenkenntnisse deutlich effizienter&effektiver stärken.
-    // Jedoch, das Interface bzw. die Dokumentation der Funktionalität (der JavaDoc-Kommentar) ist wichtig.
+    // Programmierenanfängern wird ausdrücklich davon abgeraten, die nachfolgende
+    // Implementierung verstehen zu wollen.
+    // Denn für das Verständnis sind deutlich weniger Programmierenkenntnisse, als
+    // Mathematikkenntnisse erforderlich.
+    // Kurz: Anfänger können anders ihre Programmierenkenntnisse deutlich
+    // effizienter&effektiver stärken.
+    // Jedoch, das Interface bzw. die Dokumentation der Funktionalität (der
+    // JavaDoc-Kommentar) ist wichtig.
     //
     // (p)/last time touched 2023_03_20 by Michael Schaefers
     /**
      * Trial-Subtraction ::= Optimiertes Intervall-Schachtelungs-Verfahren<br />
-     * Für Herleitung siehe:
-     *  TI4 CE oder
-     *  ARM System Developer's Guide; Designing and Optimizing System Software;
-     *  Andrew Sloss, Dominic Symes, Chris Wright;
-     *  Chap.7.4.1, 238p<br />
+     * Für Herleitung siehe: TI4 CE oder ARM System Developer's Guide; Designing and
+     * Optimizing System Software; Andrew Sloss, Dominic Symes, Chris Wright;
+     * Chap.7.4.1, 238p<br />
      * <br />
      * 
-     * Die Methode {@link #integerSqrt()} berechnet eine ganzzahlige Wurzel einer als Parameter übergebenen Zahl.
-     * Der Vorteil dieser Methode gegenüber Math.sqrt() besteht darin, dass hier KEINE Rundungsfehler auftreten.
-     * Auch wenn Math.sqrt() (im double-Wertebereich) "korrekte" Ergebnisse liefern sollte,
-     * so können immer noch Rundungsfehler bei der Wandlung nach long auftreten.
-     * <br />
-     * Achtung! Das Ergebnis ist vom Typ long. Der Namensteil integer drückt nur aus, dass das berechnete Ergebnis ganzzahlig ist.<br />
+     * Die Methode {@link #integerSqrt()} berechnet eine ganzzahlige Wurzel einer
+     * als Parameter übergebenen Zahl. Der Vorteil dieser Methode gegenüber
+     * Math.sqrt() besteht darin, dass hier KEINE Rundungsfehler auftreten. Auch
+     * wenn Math.sqrt() (im double-Wertebereich) "korrekte" Ergebnisse liefern
+     * sollte, so können immer noch Rundungsfehler bei der Wandlung nach long
+     * auftreten. <br />
+     * Achtung! Das Ergebnis ist vom Typ long. Der Namensteil integer drückt nur
+     * aus, dass das berechnete Ergebnis ganzzahlig ist.<br />
      * <br />
      * Für das Ergebnis gilt:<br />
-     * w = integerSqrt(x)    =>    ( (w+1)*(w+1) > x )   &&   ( w*w <= x )
+     * w = integerSqrt(x) => ( (w+1)*(w+1) > x ) && ( w*w <= x )
      * 
-     * @param value  der Wert von dem die ganzzahlige Wurzel bestimmt werden soll
+     * @param value der Wert von dem die ganzzahlige Wurzel bestimmt werden soll
      * 
      * @return die ganzzahlige Wurzel
      */
-    public long integerSquareRoot( final long value ){
-        if( 0 > value )  throw new IllegalArgumentException( String.format( "Parameter %d has to be positive",  value ));
-        
-        
-        long approximation = 0;                                                 // the approximation itself
-        if( value < (1L<<62) ){
-            //\=> can be handled the fast way
-            
-            // determine msb position of approximation resp. later sqrt  resp. start position of "walking one setter"
-            long tmp = value;                                                   // temporary to determine maxb position of approximation
-            int currentBitPosition = 0;                                         // current bit position where setting of bit is tested
-            if( 0 < tmp ){
+    public long integerSquareRoot(final long value) {
+        if (0 > value)
+            throw new IllegalArgumentException(String.format("Parameter %d has to be positive", value));
+
+        long approximation = 0; // the approximation itself
+        if (value < (1L << 62)) {
+            // \=> can be handled the fast way
+
+            // determine msb position of approximation resp. later sqrt resp. start position
+            // of "walking one setter"
+            long tmp = value; // temporary to determine maxb position of approximation
+            int currentBitPosition = 0; // current bit position where setting of bit is tested
+            if (0 < tmp) {
                 tmp >>>= 2;
                 approximation = 1;
-                while( 0 < tmp ){
+                while (0 < tmp) {
                     tmp >>>= 2;
                     approximation <<= 1;
                     currentBitPosition++;
-                }//while
-                
+                } // while
+
                 // start of actual integer square root computation
-                // compute integer square root with: w = integerSqrt(x)    =>    (w+1)*(w+1) > x  &&  w*w <= x 
-                long remainder = value - (approximation<<currentBitPosition);
-                do{
-                    final long refinement = 1L<<currentBitPosition;
-                    final long trialResult =  remainder  -  (((approximation<<1) + refinement) << currentBitPosition);
-                    if( 0 <= trialResult ){
+                // compute integer square root with: w = integerSqrt(x) => (w+1)*(w+1) > x &&
+                // w*w <= x
+                long remainder = value - (approximation << currentBitPosition);
+                do {
+                    final long refinement = 1L << currentBitPosition;
+                    final long trialResult = remainder - (((approximation << 1) + refinement) << currentBitPosition);
+                    if (0 <= trialResult) {
                         remainder = trialResult;
                         approximation += refinement;
-                    }//while
+                    } // while
                     currentBitPosition--;
-                }while( currentBitPosition >= 0 );
-            }//if
-            
-        }else{
-            //\=> Math.sqrt() is used that might result in rounding errors less or equal than +/-512
+                } while (currentBitPosition >= 0);
+            } // if
+
+        } else {
+            // \=> Math.sqrt() is used that might result in rounding errors less or equal
+            // than +/-512
             // and further:
-            //      9_223_372_024_852_248_004   =  3_037_000_498 * 3_037_000_498
-            //      9_223_372_030_926_249_001   =  3_037_000_499 * 3_037_000_499
-            //      9_223_372_036_854_775_807   =  Long.MAX_VALUE
-            //      square-root(Long.MAX_VALUE) =  3037000499.9760496924513885
-            // Hence, 
-            //      9_223_372_030_926_249_001 is the last (integer) square and
-            //                  3_037_000_499 is the last (integer) square root
-            //      inside long range
-            // if  approximation is greater than 3_037_000_498  than..
-            // ..approximation must be 3_037_000_499  since square is inside "long range"
+            // 9_223_372_024_852_248_004 = 3_037_000_498 * 3_037_000_498
+            // 9_223_372_030_926_249_001 = 3_037_000_499 * 3_037_000_499
+            // 9_223_372_036_854_775_807 = Long.MAX_VALUE
+            // square-root(Long.MAX_VALUE) = 3037000499.9760496924513885
+            // Hence,
+            // 9_223_372_030_926_249_001 is the last (integer) square and
+            // 3_037_000_499 is the last (integer) square root
+            // inside long range
+            // if approximation is greater than 3_037_000_498 than..
+            // ..approximation must be 3_037_000_499 since square is inside "long range"
             //
             //
             // Achtung obiges ist "hier" in unserem Anwendungsfall nicht relevant,
-            // da die Mantisse eines double ausreicht um die Wurzel eines long ohne Rundungsfehler aufzunehmen.
-            // Im Rahmen dieser Aufgabe ist der Eingabewert/Parameter value auf den Datentyp long limitiert.
-            // Es kann "hier" daher keine Rundungsfehler bei der Darstellung des Ergebnisses geben.
-            // Jedoch wie funktioniert Math.sqrt() intern - können Rundungsfehler bei der internen Berechnung auftreten???
+            // da die Mantisse eines double ausreicht um die Wurzel eines long ohne
+            // Rundungsfehler aufzunehmen.
+            // Im Rahmen dieser Aufgabe ist der Eingabewert/Parameter value auf den Datentyp
+            // long limitiert.
+            // Es kann "hier" daher keine Rundungsfehler bei der Darstellung des Ergebnisses
+            // geben.
+            // Jedoch wie funktioniert Math.sqrt() intern - können Rundungsfehler bei der
+            // internen Berechnung auftreten???
             //
             final long lastSquare = 9_223_372_030_926_249_001L;
-            final long lastSquareRoot = 3_037_000_499L;                                     // lastSquare = lastSquareRoot *lastSquareRoot
-            if( lastSquare <= value ){
-                approximation = lastSquareRoot;                                             // SC#1 resp. special case #1
-            }else{
-                //\=>  value < lastSquare 
-                approximation = (long)( Math.sqrt( value ));
-                if( lastSquareRoot < approximation )  approximation = lastSquareRoot;       // SC#2 resp. special case #2
+            final long lastSquareRoot = 3_037_000_499L; // lastSquare = lastSquareRoot *lastSquareRoot
+            if (lastSquare <= value) {
+                approximation = lastSquareRoot; // SC#1 resp. special case #1
+            } else {
+                // \=> value < lastSquare
+                approximation = (long) (Math.sqrt(value));
+                if (lastSquareRoot < approximation)
+                    approximation = lastSquareRoot; // SC#2 resp. special case #2
                 final long square = approximation * approximation;
-                if( square <= value ){                                                      // as result of SC#1 and SC#2 uncritical
-                    //\=> incrementation of integer approximation might be necessary
-                    while( (approximation+1) * (approximation+1) <= value ){                // will stop when approximation+1=lastSquareRoot as result of SC#1 and SC#2
+                if (square <= value) { // as result of SC#1 and SC#2 uncritical
+                    // \=> incrementation of integer approximation might be necessary
+                    while ((approximation + 1) * (approximation + 1) <= value) { // will stop when
+                                                                                 // approximation+1=lastSquareRoot as
+                                                                                 // result of SC#1 and SC#2
                         approximation++;
-                    }//while
-                }else{
-                    //\=> decrement integer approximation
-                    do{
+                    } // while
+                } else {
+                    // \=> decrement integer approximation
+                    do {
                         approximation--;
-                    }while( (approximation-1) * (approximation-1) >= value );
-                }//if
-            }//if
-        }//if
-        
+                    } while ((approximation - 1) * (approximation - 1) >= value);
+                } // if
+            } // if
+        } // if
+
         return approximation;
-    }//method()
-    
-}//class
+    }// method()
+
+}// class
